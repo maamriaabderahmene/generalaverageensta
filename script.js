@@ -32,7 +32,7 @@ function loadMI2() {
 }
 
 function loadModules(modules) {
-  // Clear the table
+
   modulesTable.innerHTML = `
     <tr>
       <th>Module</th>
@@ -43,7 +43,6 @@ function loadModules(modules) {
     </tr>
   `;
 
-  // Add rows for each module
   modules.forEach((module, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -56,7 +55,6 @@ function loadModules(modules) {
     modulesTable.appendChild(row);
   });
 
-  // Reset general average
   generalAverageSpan.textContent = "0.00";
 }
 
