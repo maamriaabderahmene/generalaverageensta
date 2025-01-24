@@ -23,6 +23,9 @@ const mi2Modules = [
   { name: "Probability and Statistics 1", coeff: 4 }
 ];
 
+// To store the currently loaded modules
+let currentModules = [];
+
 function loadMI1() {
   loadModules(mi1Modules);
 }
@@ -32,6 +35,7 @@ function loadMI2() {
 }
 
 function loadModules(modules) {
+  currentModules = modules; // Set the current modules to the loaded ones
 
   modulesTable.innerHTML = `
     <tr>
@@ -59,11 +63,10 @@ function loadModules(modules) {
 }
 
 function calculateAverages() {
-  const modules = mi1Modules.length > 0 ? mi1Modules : mi2Modules;
   let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
-  modules.forEach((module, index) => {
+  currentModules.forEach((module, index) => {
     const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
     const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
     const moduleAverage = (0.4 * td) + (0.6 * exam);
