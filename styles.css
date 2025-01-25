@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -41,8 +42,8 @@ h1 {
 }
 
 table {
-  width: 80%;
-  max-width: 1000px;
+  width: 100%; /* Full width on mobile */
+  max-width: 1000px; /* Limit width on desktop */
   border-collapse: collapse;
   margin-bottom: 20px;
   background: #fff;
@@ -98,4 +99,61 @@ input[type="number"]:focus {
 
 .average span {
   color: #6a11cb;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* Smaller heading for mobile */
+  }
+
+  .program-buttons {
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 10px;
+  }
+
+  .program-buttons button {
+    width: 100%; /* Full-width buttons on mobile */
+  }
+
+  table {
+    width: 100%; /* Full-width table on mobile */
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  th, td {
+    padding: 8px; /* Smaller padding for mobile */
+  }
+
+  input[type="number"] {
+    width: 60px; /* Smaller input fields for mobile */
+  }
+
+  .average {
+    font-size: 18px; /* Smaller font size for mobile */
+    padding: 10px 20px; /* Smaller padding for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem; /* Even smaller heading for very small screens */
+  }
+
+  table {
+    font-size: 12px; /* Smaller font size for very small screens */
+  }
+
+  th, td {
+    padding: 6px; /* Even smaller padding for very small screens */
+  }
+
+  input[type="number"] {
+    width: 50px; /* Even smaller input fields for very small screens */
+  }
+
+  .average {
+    font-size: 16px; /* Even smaller font size for very small screens */
+    padding: 8px 16px; /* Even smaller padding for very small screens */
+  }
 }
