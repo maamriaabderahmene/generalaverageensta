@@ -23,8 +23,33 @@ const mi2Modules = [
   { name: "Probability and Statistics 1", coeff: 4 }
 ];
 
-// To store the currently loaded modules
-let currentModules = [];
+const st1Modules = [
+  { name: "Analyse 1", coeff: 6 },
+  { name: "Algèbre 1", coeff: 3 },
+  { name: "Probabilités-Statistiques", coeff: 3 },
+  { name: "Physiques 1", coeff: 5 },
+  { name: "Chimie 1", coeff: 5 },
+  { name: "Informatique 1", coeff: 3 },
+  { name: "Dessin technique", coeff: 1 },
+  { name: "Ingénierie humaine 1", coeff: 1 },
+  { name: "Economie générale", coeff: 1 },
+  { name: "Anglais 1", coeff: 1 },
+  { name: "Français 1", coeff: 1 }
+];
+
+const st2Modules = [
+  { name: "Analyse 3", coeff: 4 },
+  { name: "Analyse numérique 1", coeff: 2 },
+  { name: "Physiques 3", coeff: 4 },
+  { name: "Chimie 3", coeff: 3 },
+  { name: "Mécanique rationelle 1", coeff: 3 },
+  { name: "Electricité générale", coeff: 3 },
+  { name: "Mécanique des fluides", coeff: 3 },
+  { name: "Informatique 3", coeff: 3 },
+  { name: "Ingénierie 1", coeff: 3 },
+  { name: "Techniques d’expression 1", coeff: 1 },
+  { name: "Anglais 3", coeff: 1 }
+];
 
 function loadMI1() {
   loadModules(mi1Modules);
@@ -34,9 +59,16 @@ function loadMI2() {
   loadModules(mi2Modules);
 }
 
-function loadModules(modules) {
-  currentModules = modules; // Set the current modules to the loaded ones
+function loadST1() {
+  loadModules(st1Modules);
+}
 
+function loadST2() {
+  loadModules(st2Modules);
+}
+
+function loadModules(modules) {
+  // Clear the table
   modulesTable.innerHTML = `
     <tr>
       <th>Module</th>
@@ -47,6 +79,7 @@ function loadModules(modules) {
     </tr>
   `;
 
+  // Add rows for each module
   modules.forEach((module, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -59,14 +92,20 @@ function loadModules(modules) {
     modulesTable.appendChild(row);
   });
 
+  // Reset general average
   generalAverageSpan.textContent = "0.00";
 }
 
 function calculateAverages() {
+  const modules = mi1Modules.length > 0 ? mi1Modules :
+                  mi2Modules.length > 0 ? mi2Modules :
+                  st1Modules.length > 0 ? st1Modules :
+                  st2Modules;
+
   let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
-  currentModules.forEach((module, index) => {
+  modules.forEach((module, index) => {
     const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
     const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
     const moduleAverage = (0.4 * td) + (0.6 * exam);
