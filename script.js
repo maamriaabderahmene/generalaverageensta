@@ -52,20 +52,35 @@ const st2Modules = [
   { name: "Anglais 3", coeff: 1 }
 ];
 
+// Total coefficients for each program
+const totalCoeffs = {
+  mi1: 26,
+  mi2: 28,
+  st1: 30,
+  st2: 30
+};
+
+// Track the currently loaded program
+let currentProgram = null;
+
 // Load functions
 function loadMI1() {
+  currentProgram = "mi1";
   loadModules(mi1Modules);
 }
 
 function loadMI2() {
+  currentProgram = "mi2";
   loadModules(mi2Modules);
 }
 
 function loadST1() {
+  currentProgram = "st1";
   loadModules(st1Modules);
 }
 
 function loadST2() {
+  currentProgram = "st2";
   loadModules(st2Modules);
 }
 
@@ -102,7 +117,6 @@ function loadModules(modules) {
 // Calculate module and general averages
 function calculateAverages() {
   const tableRows = Array.from(modulesTable.rows).slice(1); // Skip header row
-  let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
   tableRows.forEach((row, index) => {
@@ -114,12 +128,12 @@ function calculateAverages() {
     const moduleAverage = (0.4 * td) + (0.6 * exam);
     row.cells[4].textContent = moduleAverage.toFixed(2); // Update module average cell
 
-    // Update totals for general average
-    totalCoeff += coeff;
+    // Update total weighted average
     totalWeightedAverage += moduleAverage * coeff;
   });
 
   // Calculate general average
+  const totalCoeff = totalCoeffs[currentProgram] || 0;
   const generalAverage = totalCoeff ? totalWeightedAverage / totalCoeff : 0;
   generalAverageSpan.textContent = generalAverage.toFixed(2);
 }
