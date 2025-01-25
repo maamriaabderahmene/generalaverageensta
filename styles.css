@@ -1,4 +1,4 @@
-
+/* General Styles */
 body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -101,7 +101,61 @@ input[type="number"]:focus {
   color: #6a11cb;
 }
 
+/* Quote Box Styles */
+.quote-box {
+  max-width: 600px; /* Limit width for better readability */
+  margin: 20px auto; /* Center the box horizontally */
+  padding: 20px;
+  background: #f9f9f9; /* Light background color */
+  border-left: 8px solid #6a11cb; /* Accent color on the left */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-style: italic; /* Italic text for a quote-like appearance */
+  color: #555; /* Dark gray text color */
+  text-align: center; /* Center-align the text */
+  position: relative; /* For positioning the quotation marks */
+}
 
+.quote-box::before {
+  content: "“"; /* Opening quotation mark */
+  font-size: 4rem; /* Large size for emphasis */
+  color: #6a11cb; /* Accent color */
+  position: absolute;
+  top: -20px; /* Position above the box */
+  left: 10px; /* Position to the left */
+}
+
+.quote-box::after {
+  content: "”"; /* Closing quotation mark */
+  font-size: 4rem; /* Large size for emphasis */
+  color: #6a11cb; /* Accent color */
+  position: absolute;
+  bottom: -40px; /* Position below the box */
+  right: 10px; /* Position to the right */
+}
+
+.quote-box p {
+  margin: 0; /* Remove default margin */
+  font-size: 1.1rem; /* Slightly larger font size */
+  line-height: 1.6; /* Improve readability */
+}
+
+/* Center alignment for the footer */
+.center {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.center a {
+  color: #6a11cb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.center a:hover {
+  text-decoration: underline;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -157,60 +211,4 @@ input[type="number"]:focus {
     font-size: 16px; /* Even smaller font size for phones */
     padding: 8px 16px; /* Even smaller padding for phones */
   }
-}
-
-/* Quote Box Styles */
-.quote-box {
-  max-width: 600px; /* Limit width for better readability */
-  margin: 20px auto; /* Center the box horizontally */
-  padding: 20px;
-  background: #f9f9f9; /* Light background color */
-  border-left: 8px solid #6a11cb; /* Accent color on the left */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  font-style: italic; /* Italic text for a quote-like appearance */
-  color: #555; /* Dark gray text color */
-  text-align: center; /* Center-align the text */
-  position: relative; /* For positioning the quotation marks */
-}
-
-.quote-box::before {
-  content: "“"; /* Opening quotation mark */
-  font-size: 4rem; /* Large size for emphasis */
-  color: #6a11cb; /* Accent color */
-  position: absolute;
-  top: -20px; /* Position above the box */
-  left: 10px; /* Position to the left */
-}
-
-.quote-box::after {
-  content: "”"; /* Closing quotation mark */
-  font-size: 4rem; /* Large size for emphasis */
-  color: #6a11cb; /* Accent color */
-  position: absolute;
-  bottom: -40px; /* Position below the box */
-  right: 10px; /* Position to the right */
-}
-
-.quote-box p {
-  margin: 0; /* Remove default margin */
-  font-size: 1.1rem; /* Slightly larger font size */
-  line-height: 1.6; /* Improve readability */
-}
-
-/* Center alignment for the footer */
-.center {
-  text-align: center;
-  margin-top: 20px;
-  color: #333;
-}
-
-.center a {
-  color: #6a11cb;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.center a:hover {
-  text-decoration: underline;
 }
