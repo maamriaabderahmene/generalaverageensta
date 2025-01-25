@@ -1,6 +1,7 @@
 const modulesTable = document.getElementById('modules-table');
 const generalAverageSpan = document.getElementById('general-average');
 
+// Module lists
 const mi1Modules = [
   { name: "Electricity", coeff: 3 },
   { name: "Office Tools and Web", coeff: 1 },
@@ -51,6 +52,7 @@ const st2Modules = [
   { name: "Anglais 3", coeff: 1 }
 ];
 
+// Load functions
 function loadMI1() {
   loadModules(mi1Modules);
 }
@@ -67,6 +69,7 @@ function loadST2() {
   loadModules(st2Modules);
 }
 
+// Populate the table dynamically
 function loadModules(modules) {
   // Clear the table
   modulesTable.innerHTML = `
@@ -85,8 +88,8 @@ function loadModules(modules) {
     row.innerHTML = `
       <td>${module.name}</td>
       <td>${module.coeff}</td>
-      <td><input type="number" min="0" max="20" oninput="calculateAverages()" id="td-${index}"></td>
-      <td><input type="number" min="0" max="20" oninput="calculateAverages()" id="exam-${index}"></td>
+      <td><input type="number" min="0" max="20" oninput="calculateAverages(${JSON.stringify(modules)})" id="td-${index}"></td>
+      <td><input type="number" min="0" max="20" oninput="calculateAverages(${JSON.stringify(modules)})" id="exam-${index}"></td>
       <td id="module-avg-${index}">0.00</td>
     `;
     modulesTable.appendChild(row);
@@ -96,12 +99,8 @@ function loadModules(modules) {
   generalAverageSpan.textContent = "0.00";
 }
 
-function calculateAverages() {
-  const modules = mi1Modules.length > 0 ? mi1Modules :
-                  mi2Modules.length > 0 ? mi2Modules :
-                  st1Modules.length > 0 ? st1Modules :
-                  st2Modules;
-
+// Calculate module and general averages
+function calculateAverages(modules) {
   let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
