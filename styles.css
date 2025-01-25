@@ -156,4 +156,59 @@ input[type="number"]:focus {
     font-size: 16px; /* Even smaller font size for very small screens */
     padding: 8px 16px; /* Even smaller padding for very small screens */
   }
+  /* Quote Box Styles */
+.quote-box {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-left: 8px solid #6a11cb; /* Accent color */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-style: italic;
+  color: #555;
+  text-align: center;
+  position: relative;
+}
+
+.quote-box::before {
+  content: "“";
+  font-size: 4rem;
+  color: #6a11cb;
+  position: absolute;
+  top: -20px;
+  left: 10px;
+}
+
+.quote-box::after {
+  content: "”";
+  font-size: 4rem;
+  color: #6a11cb;
+  position: absolute;
+  bottom: -40px;
+  right: 10px;
+}
+
+.quote-box p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Center alignment for the footer */
+.center {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.center a {
+  color: #6a11cb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.center a:hover {
+  text-decoration: underline;
+}
 }
