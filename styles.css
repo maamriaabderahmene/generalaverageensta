@@ -1,36 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculate Moyen Général</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Calculate Moyen Général</h1>
-  <div class="program-buttons">
-    <button onclick="loadMI1()">MI1</button>
-    <button onclick="loadMI2()">MI2</button>
-    <button onclick="loadST1()">ST1</button>
-    <button onclick="loadST2()">ST2</button>
-  </div>
-  <table id="modules-table">
-    <!-- Table content will be dynamically generated -->
-  </table>
-  <div class="average">
-    <p>General Average: <span id="general-average">0.00</span></p>
-  </div>
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-  <!-- Quote Box -->
-  <div class="quote-box">
-    <p>Hello everyone, this is Abderahmene. I just wanted to make things easier for you, so you don’t need to create a sheet or use a calculator. That’s why I provided this tool.</p>
-  </div>
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  <!-- Footer -->
-  <div class="center">
-    <h3>Made with ❤️❤️ by <a href="https://www.instagram.com/maamria_abderahmene_/">Maamria Abderahmene</a>...</h3>
-  </div>
+.program-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.program-buttons button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.program-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%; /* Full width on mobile */
+  max-width: 1000px; /* Limit width on desktop */
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+  outline: none;
+}
+
+.average {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+  background: #fff;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.average span {
+  color: #6a11cb;
+}
+
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* Smaller heading for tablets */
+  }
+
+  .program-buttons {
+    flex-direction: column; /* Stack buttons vertically on tablets */
+    gap: 10px;
+  }
+
+  .program-buttons button {
+    width: 100%; /* Full-width buttons on tablets */
+  }
+
+  table {
+    font-size: 14px; /* Smaller font size for tablets */
+  }
+
+  th, td {
+    padding: 8px; /* Smaller padding for tablets */
+  }
+
+  input[type="number"] {
+    width: 60px; /* Smaller input fields for tablets */
+  }
+
+  .average {
+    font-size: 18px; /* Smaller font size for tablets */
+    padding: 10px 20px; /* Smaller padding for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem; /* Even smaller heading for phones */
+  }
+
+  table {
+    font-size: 12px; /* Smaller font size for phones */
+  }
+
+  th, td {
+    padding: 6px; /* Even smaller padding for phones */
+  }
+
+  input[type="number"] {
+    width: 50px; /* Even smaller input fields for phones */
+  }
+
+  .average {
+    font-size: 16px; /* Even smaller font size for phones */
+    padding: 8px 16px; /* Even smaller padding for phones */
+  }
+}
+
+/* Quote Box Styles */
+.quote-box {
+  max-width: 600px; /* Limit width for better readability */
+  margin: 20px auto; /* Center the box horizontally */
+  padding: 20px;
+  background: #f9f9f9; /* Light background color */
+  border-left: 8px solid #6a11cb; /* Accent color on the left */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-style: italic; /* Italic text for a quote-like appearance */
+  color: #555; /* Dark gray text color */
+  text-align: center; /* Center-align the text */
+  position: relative; /* For positioning the quotation marks */
+}
+
+.quote-box::before {
+  content: "“"; /* Opening quotation mark */
+  font-size: 4rem; /* Large size for emphasis */
+  color: #6a11cb; /* Accent color */
+  position: absolute;
+  top: -20px; /* Position above the box */
+  left: 10px; /* Position to the left */
+}
+
+.quote-box::after {
+  content: "”"; /* Closing quotation mark */
+  font-size: 4rem; /* Large size for emphasis */
+  color: #6a11cb; /* Accent color */
+  position: absolute;
+  bottom: -40px; /* Position below the box */
+  right: 10px; /* Position to the right */
+}
+
+.quote-box p {
+  margin: 0; /* Remove default margin */
+  font-size: 1.1rem; /* Slightly larger font size */
+  line-height: 1.6; /* Improve readability */
+}
+
+/* Center alignment for the footer */
+.center {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.center a {
+  color: #6a11cb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.center a:hover {
+  text-decoration: underline;
+}
