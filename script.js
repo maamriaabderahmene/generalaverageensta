@@ -100,20 +100,29 @@ function loadModules(modules) {
 }
 
 // Calculate module and general averages
-function calculateAverages(modules) {
+function calculateAverages() {
+  // Determine which module set is currently loaded
+  const tableRows = Array.from(modulesTable.rows).slice(1); // Skip header row
+  const modules = tableRows.map((row, index) => ({
+    coeff: parseInt(row.cells[1].textContent), // Coefficient from the table
+    tdInput: document.getElementById(`td-${index}`),
+    examInput: document.getElementById(`exam-${index}`),
+    avgCell: row.cells[4]
+  }));
+
   let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
-  modules.forEach((module, index) => {
-    const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
-    const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
+  modules.forEach(({ coeff, tdInput, examInput, avgCell }) => {
+    const td = parseFloat(tdInput.value) || 0;
+    const exam = parseFloat(examInput.value) || 0;
     const moduleAverage = (0.4 * td) + (0.6 * exam);
-    document.getElementById(`module-avg-${index}`).textContent = moduleAverage.toFixed(2);
+    avgCell.textContent = moduleAverage.toFixed(2);
 
-    totalCoeff += module.coeff;
-    totalWeightedAverage += moduleAverage * module.coeff;
+    totalCoeff += coeff;
+    totalWeightedAverage += moduleAverage * coeff;
   });
 
-  const generalAverage = totalWeightedAverage / totalCoeff;
+  const generalAverage = totalCoeff ? totalWeightedAverage / totalCoeff : 0;
   generalAverageSpan.textContent = generalAverage.toFixed(2);
 }
