@@ -88,8 +88,8 @@ function loadModules(modules) {
     row.innerHTML = `
       <td>${module.name}</td>
       <td>${module.coeff}</td>
-      <td><input type="number" min="0" max="20" oninput="calculateAverages(${JSON.stringify(modules)})" id="td-${index}"></td>
-      <td><input type="number" min="0" max="20" oninput="calculateAverages(${JSON.stringify(modules)})" id="exam-${index}"></td>
+      <td><input type="number" min="0" max="20" oninput="calculateAverages()" id="td-${index}"></td>
+      <td><input type="number" min="0" max="20" oninput="calculateAverages()" id="exam-${index}"></td>
       <td id="module-avg-${index}">0.00</td>
     `;
     modulesTable.appendChild(row);
@@ -101,28 +101,25 @@ function loadModules(modules) {
 
 // Calculate module and general averages
 function calculateAverages() {
-  // Determine which module set is currently loaded
   const tableRows = Array.from(modulesTable.rows).slice(1); // Skip header row
-  const modules = tableRows.map((row, index) => ({
-    coeff: parseInt(row.cells[1].textContent), // Coefficient from the table
-    tdInput: document.getElementById(`td-${index}`),
-    examInput: document.getElementById(`exam-${index}`),
-    avgCell: row.cells[4]
-  }));
-
   let totalCoeff = 0;
   let totalWeightedAverage = 0;
 
-  modules.forEach(({ coeff, tdInput, examInput, avgCell }) => {
-    const td = parseFloat(tdInput.value) || 0;
-    const exam = parseFloat(examInput.value) || 0;
+  tableRows.forEach((row, index) => {
+    const coeff = parseInt(row.cells[1].textContent); // Get coefficient from the table
+    const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
+    const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
     const moduleAverage = (0.4 * td) + (0.6 * exam);
-    avgCell.textContent = moduleAverage.toFixed(2);
 
+    // Update module average cell
+    row.cells[4].textContent = moduleAverage.toFixed(2);
+
+    // Update totals
     totalCoeff += coeff;
     totalWeightedAverage += moduleAverage * coeff;
   });
 
+  // Calculate and display general average
   const generalAverage = totalCoeff ? totalWeightedAverage / totalCoeff : 0;
   generalAverageSpan.textContent = generalAverage.toFixed(2);
 }
