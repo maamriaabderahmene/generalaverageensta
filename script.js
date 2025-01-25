@@ -109,17 +109,17 @@ function calculateAverages() {
     const coeff = parseInt(row.cells[1].textContent); // Get coefficient from the table
     const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
     const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
+
+    // Calculate module average
     const moduleAverage = (0.4 * td) + (0.6 * exam);
+    row.cells[4].textContent = moduleAverage.toFixed(2); // Update module average cell
 
-    // Update module average cell
-    row.cells[4].textContent = moduleAverage.toFixed(2);
-
-    // Update totals
+    // Update totals for general average
     totalCoeff += coeff;
     totalWeightedAverage += moduleAverage * coeff;
   });
 
-  // Calculate and display general average
+  // Calculate general average
   const generalAverage = totalCoeff ? totalWeightedAverage / totalCoeff : 0;
   generalAverageSpan.textContent = generalAverage.toFixed(2);
 }
